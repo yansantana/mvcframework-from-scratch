@@ -1,6 +1,6 @@
 <?php
 class Core {
-    protected $currentController = 'Exam';
+    protected $currentController = 'Index';
     protected $currentMethod = 'index';
     protected $params = [];
 

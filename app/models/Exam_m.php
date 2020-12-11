@@ -33,7 +33,7 @@ class Exam_m {
         if($id){
             $this->db->query("UPDATE employees SET firstname=:firstname, lastname=:lastname, age=:age, birth_date=:birth_date, job_title=:job_title, access_level_id=:access_level_id, email=:email, password=:password, date_created=:date_created, date_modified=:date_modified WHERE id=:id");
         } else {
-            $this->db->query("INSERT INTO employees (firstname, lastname, age, birth_date, job_title, access_level_id, email, password, date_created, date_modified) VALUinto ES (:firstname, :lastname, :age, :birth_date, :job_title, :access_level_id, :email, :password, :date_created, :date_modified )");
+            $this->db->query("INSERT INTO employees (firstname, lastname, age, birth_date, job_title, access_level_id, email, password, date_created, date_modified) VALUES (:firstname, :lastname, :age, :birth_date, :job_title, :access_level_id, :email, :password, :date_created, :date_modified )");
         }
         if($id) {
             $this->db->bind(':id' , $id);

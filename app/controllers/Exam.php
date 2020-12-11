@@ -16,6 +16,7 @@ class Exam extends Controller {
         $this->view('index', $data);
     }
     public function login() {
+        $data['x']=0;
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data['email'] = $_POST["email"];
             $data['password'] = $_POST["password"];
@@ -24,15 +25,16 @@ class Exam extends Controller {
             if($loggedInUser) {
                 $_SESSION['loggedin'] = true;
                 $_SESSION['access_level'] = $loggedInUser->access_level_id;
-                header("Location:" . URLROOT);
+                header("Location:" . URLROOT . '/exam');
                 exit;
             } else {
-                echo "false";
+                $data['x']=1;
+                $data['message'] = 'Login failed. <br> Invalid email or password.';
             }
                 
         }
         $this->view('page_head');
-        $this->view('login');
+        $this->view('login' ,$data);
     }
     public function add_employee($id=NULL) {
         $this->check();
@@ -50,12 +52,12 @@ class Exam extends Controller {
 
             if($id) {
                 if($this->exam_m->insertEmployee($data , $id)) {
-                    header("Location:" . URLROOT);
+                    header("Location:" . URLROOT . '/exam');
                     exit;
                 }
             } else {
                 if($this->exam_m->insertEmployee($data)) {
-                    header("Location:" . URLROOT);
+                    header("Location:" . URLROOT . '/exam');
                     exit;
                 }
             }
@@ -70,7 +72,7 @@ class Exam extends Controller {
 
     public function delete($id) {
         if($this->exam_m->delete($id)) {
-            header("Location:" . URLROOT);
+            header("Location:" . URLROOT . '/exam');
             exit;
         }
     }
